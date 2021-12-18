@@ -23,8 +23,8 @@ import { ProjectModule } from './project/project.module';
     HeroModule,
     ProjectModule,
   ],
-  controllers: [AppController, ProjectController],
-  providers: [AppService, ProjectService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule { 
 }
