@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { getProjectsMock } from '../domains/mocks/project.mock';
 import { ProjectDocument, ProjectModel } from '../domains/models/project.model';
 
 @Injectable()
@@ -27,6 +26,12 @@ export class ProjectService {
     async getProjects(): Promise<ProjectModel[]>{
         const dbResult = await this.projectModel.find({});
         return dbResult;
+    }
+
+    async findByUserId(userId: string): Promise<ProjectModel[]>{
+        const dbResult = await this.projectModel.find({'user': userId});
+        console.log('dbResult', dbResult)
+        return dbResult ? dbResult : [];
     }
 
     async delete(projectId: string): Promise<ProjectModel>{

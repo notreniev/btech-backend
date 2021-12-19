@@ -10,7 +10,6 @@ export class AuthController {
     @Post('signin')
     async signin(@Body() user: UserModel) {
         const result = await this.authService.validateUser(user);
-        console.log('result', result)
         return result;
       }
 }

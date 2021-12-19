@@ -26,6 +26,11 @@ export class ProjectController {
         return await this.projectService.getProject(id);
     }
 
+    @Get('/:userId/user')
+    findByUserId(@Param('userId') userId: string):Promise<ProjectModel[]>{
+        return this.projectService.findByUserId(userId);
+    }
+
     @Delete('/:id')
     async remove(@Param('id') projectId: string){
         return await this.projectService.delete(projectId);
