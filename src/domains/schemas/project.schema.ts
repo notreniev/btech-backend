@@ -6,6 +6,7 @@ export const ProjectSchema = new Schema(
     {
         title: String,
         tasks: { type: [], ref: TaskModel },
+        done: { type: [], ref: TaskModel },
         user: { type: Schema.Types.ObjectId, ref: UserModel },
     },
     {

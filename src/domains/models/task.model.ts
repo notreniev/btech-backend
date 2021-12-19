@@ -5,5 +5,5 @@ export class TaskModel{
     description: string;
     createdAt: Date;
     finishedAt: Date;
-    completed: boolean;
+    removed: boolean;
 }
