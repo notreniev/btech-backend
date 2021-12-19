@@ -30,7 +30,6 @@ export class ProjectService {
 
     async findByUserId(userId: string): Promise<ProjectModel[]>{
         const dbResult = await this.projectModel.find({'user': userId});
-        console.log('dbResult', dbResult)
         return dbResult ? dbResult : [];
     }
 
