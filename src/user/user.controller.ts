@@ -22,9 +22,9 @@ export class UserController {
         return this.userService.findAll();
     }
 
-    @Get('/:id')
-    async findById(@Param('id') id: string):Promise<UserModel[]>{
-        return await this.userService.findById(id);
+    @Get('/:user')
+    async findById(@Param('user') user: string){
+        return await this.userService.findByEmail(user);
     }
 
     @Delete('/:id')

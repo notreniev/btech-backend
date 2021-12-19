@@ -19,8 +19,11 @@ export class UserService {
         return dbResult;
     }
 
-    async findById(userId: string): Promise<UserModel[]>{
-        const dbResult = await this.userModel.find({_id: userId});
+    async findByEmail(user: string){
+        const dbResult = await this.userModel
+            .find({email: user})
+            .select('_id name email')
+            .exec();
         return dbResult;
     }
 
