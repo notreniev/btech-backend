@@ -9,4 +9,5 @@ export class ProjectModel{
     tasks: TaskModel[] = [];
     done: TaskModel[] = [];
     user: UserModel;
+    createdAt: Date = new Date();
 }

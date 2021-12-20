@@ -3,7 +3,6 @@ import { UserModel } from '../domains/models/user.model';
 import { AuthService } from './auth.service';
 import * as jwt from 'jsonwebtoken';
 import { LoginVo } from './vo/login.vo';
-import { LoginDto } from './dto/login.dto';
 
 @Controller('api/auth')
 export class AuthController {
@@ -17,16 +16,15 @@ export class AuthController {
       const { email, password } = user;
       const foundUser = await this.authService.validateUser(email);
       if (foundUser && this.matches(foundUser, password)) {
-        // gerar um token
         const token = jwt.sign({sub: foundUser.email, iss: 'todo-api'}, process.env.SECRET);
         const loginVo = new LoginVo(token, foundUser);
         return loginVo;
+
       } else {
         throw new HttpException({ message: 'Invalid Credentials' }, HttpStatus.BAD_REQUEST);
       }
     } catch (error) {
-      console.error('error', error);
-      //implementar error handler aqui
+      throw new HttpException({ message: 'Unauthorized' }, HttpStatus.UNAUTHORIZED);
     }
   }
 
