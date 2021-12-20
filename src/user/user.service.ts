@@ -3,15 +3,22 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserModel } from '../domains/models/user.model';
 import { UserDocument } from '../domains/schemas/user.schema';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
 
     constructor(@InjectModel('User') private readonly userModel: Model<UserDocument>){}
 
-    create(project: UserModel): Promise<UserModel>{
-        const dbResult = this.userModel.create(project);
-        return dbResult;
+    async create(user: UserModel): Promise<UserModel>{
+        try {
+            const hash = await bcrypt.hash(user.password, bcrypt.genSaltSync(Number(process.env.SALT_ROUNDS)));
+            user.password = hash;
+            const dbResult = this.userModel.create(user);
+            return dbResult;
+        } catch (error) {
+            throw error;
+        }
     }
 
     async update(user: UserModel): Promise<UserModel>{

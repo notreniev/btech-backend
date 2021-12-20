@@ -3,6 +3,7 @@ import { UserModel } from '../domains/models/user.model';
 import { AuthService } from './auth.service';
 import * as jwt from 'jsonwebtoken';
 import { LoginVo } from './vo/login.vo';
+import * as bcrypt from 'bcrypt';
 
 @Controller('api/auth')
 export class AuthController {
@@ -29,7 +30,7 @@ export class AuthController {
   }
 
   private matches(user: UserModel, password: string){
-    // console.log(user.password, password, user.password === password)
-    return user.password === password;
+    const hashCompare = bcrypt.compareSync(password, user.password);
+    return hashCompare;
   }
 }
