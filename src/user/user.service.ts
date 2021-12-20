@@ -19,10 +19,10 @@ export class UserService {
         return dbResult;
     }
 
-    async findByEmail(user: string){
+    async findByEmail(user: string): Promise<UserModel>{
         const dbResult = await this.userModel
-            .find({email: user})
-            .select('_id name email')
+            .findOne({email: user})
+            .select('_id name email password')
             .exec();
         return dbResult;
     }

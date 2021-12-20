@@ -6,8 +6,8 @@ import { UserService } from '../user/user.service';
 export class AuthService {
     constructor(private userService: UserService) {}
 
-    async validateUser(user: UserModel) {
-        const foundUser = await this.userService.findByEmail(user.email);
+    async validateUser(email: string) {
+        const foundUser = await this.userService.findByEmail(email);
         if (foundUser) {
         //   return await encrypt(foundUser);
             return foundUser;
