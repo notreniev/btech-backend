@@ -35,6 +35,9 @@ $ npm install
 ## Running the app
 
 ```bash
+# run docker compose
+$ docker compose up
+
 # development
 $ npm run start
 
@@ -50,9 +53,6 @@ $ npm run start:prod
 ```bash
 # unit tests
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
