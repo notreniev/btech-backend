@@ -14,7 +14,8 @@ export class UserService {
         try {
             const hash = await bcrypt.hash(user.password, bcrypt.genSaltSync(Number(process.env.SALT_ROUNDS)));
             user.password = hash;
-            const dbResult = this.userModel.create(user);
+            const dbResult = await this.userModel.create(user);
+            dbResult.password = undefined;
             return dbResult;
         } catch (error) {
             throw error;

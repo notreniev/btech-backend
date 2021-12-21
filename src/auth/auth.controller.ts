@@ -17,6 +17,7 @@ export class AuthController {
       const { email, password } = user;
       const foundUser = await this.authService.validateUser(email);
       if (foundUser && this.matches(foundUser, password)) {
+        delete foundUser.password;
         const token = jwt.sign({sub: foundUser.email, iss: 'todo-api'}, process.env.SECRET);
         const loginVo = new LoginVo(token, foundUser);
         return loginVo;
